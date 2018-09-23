@@ -8,7 +8,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.text.ParseException;
 
-import javax.swing.AbstractAction;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
@@ -333,15 +332,6 @@ public class CadastrarAlunosWindow extends AbstractWindowFrame{
 		});
 		
 		btnSalvar.addKeyListener((KeyListener) acao);
-		
-		btnAtualizar = new JButton (new AbstractAction() {
-			private static final long serialVersionUID = 1L;
-
-			public void actionPerformed(ActionEvent e) {
-				cbxUf.setSelectedIndex(0);
-				cbxPais.setSelectedIndex(0);
-			}
-		});
 	}
 	
 	public void cadastraAluno() {
