@@ -1,16 +1,20 @@
 package br.com.bookregister.view;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 import javax.swing.AbstractAction;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import br.com.bookregister.model.bean.User;
 import br.com.bookregister.model.dao.UserDao;
 
 
@@ -28,10 +32,12 @@ public class CadastrarUsuarioWindow extends AbstractWindowFrame{
 	};
 
 	private JPasswordField txfSenha;
-	private JTextField txfUsuario;
+	private JTextField txfLogin;
 	private JButton btnCadastra;
 	private JButton btnLimpar;
 	private JLabel saida;
+	private JButton iconLogin;
+	private JButton iconSenha;
 
 	public CadastrarUsuarioWindow() {
 		super("Cadastrar Usuário");
@@ -39,22 +45,23 @@ public class CadastrarUsuarioWindow extends AbstractWindowFrame{
 	}
 
 	private void criarComponentes() {
-		saida = new JLabel("Login: ");
+		
+		saida = new JLabel("Usuario: ");
 		saida.setBounds(550, 175, 200, 25);
 		getContentPane().add(saida);
 
-		txfUsuario = new JTextField();
-		txfUsuario.setBounds(550, 200, 200, 25);
-		txfUsuario.setToolTipText("Digite o código");
-		getContentPane().add(txfUsuario);
-		txfUsuario.addKeyListener(acao);
+		txfLogin = new JTextField();
+		txfLogin.setBounds(550, 200, 200, 30);
+		txfLogin.setToolTipText("Digite o usuario");
+		getContentPane().add(txfLogin);
+		txfLogin.addKeyListener(acao);
 
 		saida = new JLabel("Senha:");
 		saida.setBounds(550, 235, 200, 25);
 		getContentPane().add(saida);
 
 		txfSenha = new JPasswordField();
-		txfSenha.setBounds(550, 260, 200, 25);
+		txfSenha.setBounds(550, 260, 200, 30);
 		txfSenha.setToolTipText("Digite uma senha");
 		getContentPane().add(txfSenha);
 		txfSenha.addKeyListener(acao);
@@ -75,10 +82,31 @@ public class CadastrarUsuarioWindow extends AbstractWindowFrame{
 		btnCadastra.addKeyListener(acao);
 		btnCadastra.setBounds(655, 310, 95, 25);
 		getContentPane().add(btnCadastra);
+		
+		iconLogin = new JButton();
+		iconLogin.setBounds(510, 201, 28, 28);
+		iconLogin.setBackground(new Color(235, 223, 253));
+		iconLogin.setBorderPainted(false);
+		Icon iconeLogin = new ImageIcon(getClass().getResource("/br/com/bookregister/icons/iconLogin.png"));
+		iconLogin.setBackground(getBackground());
+		iconLogin.setIcon(iconeLogin);
+		iconLogin.setToolTipText("Atualizar Campos");
+		getContentPane().add(iconLogin);
+		
+		iconSenha = new JButton();
+		iconSenha.setBounds(510, 261, 28, 28);
+		iconSenha.setBackground(new Color(235, 223, 253));
+		iconSenha.setBorderPainted(false);
+		Icon iconeSenha = new ImageIcon(getClass().getResource("/br/com/bookregister/icons/iconSenha.png"));
+		iconSenha.setBackground(getBackground());
+		iconSenha.setIcon(iconeSenha);
+		iconSenha.setToolTipText("Atualizar Campos");
+		getContentPane().add(iconSenha);
+		
 	}
 
 	public boolean validarCamposObrigatorios() {
-		if (txfUsuario.getText().isEmpty() || (new String(txfSenha.getPassword())).isEmpty()) {
+		if (txfLogin.getText().isEmpty() || (new String(txfSenha.getPassword())).isEmpty()) {
 			return true;
 		}
 
@@ -92,18 +120,23 @@ public class CadastrarUsuarioWindow extends AbstractWindowFrame{
 					JOptionPane.ERROR_MESSAGE, null);
 			return;
 		}else {
-			String usuario = txfUsuario.getText();
+			String login = txfLogin.getText();
 			String senha = new String(txfSenha.getPassword());
 			
+			User user = new User();
+			
+			user.setLogin(login);
+			user.setSenha(senha);
+			
 			UserDao uD = new UserDao();
-			uD.registerUser(usuario, senha);
+			uD.registerUser(user);
 			JOptionPane.showMessageDialog(null, "Usuario cadastrado com sucesso!");
 			limparFormulario();
 		}
 	}
 
 	public void limparFormulario() {
-		txfUsuario.setText("");
+		txfLogin.setText("");
 		txfSenha.setText("");
 	}
 }

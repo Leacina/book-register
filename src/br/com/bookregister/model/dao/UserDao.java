@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import br.com.bookregister.connection.ConnectionFactory;
+import br.com.bookregister.model.bean.User;
 import br.com.bookregister.view.CadastrarPrimeiroUser;
 import br.com.bookregister.view.LoginWindow;
 import br.com.bookregister.view.Window;
@@ -25,13 +26,13 @@ public class UserDao {
 		this.lW = lW;
 	}
 	
-	public void checkLogin(String login, String senha) {
+	public void checkLogin(User user) {
 
 		try {
-			if (login.equals("admin") && senha.equals("admin")) {
+			if (user.getLogin().equals("admin") && user.getSenha().equals("admin")) {
 				stmt = con.prepareStatement("Select * from usuario where usuario = ? and senha = ? and id = 1");
-				stmt.setString(1, login);
-				stmt.setString(2, senha);
+				stmt.setString(1, user.getLogin());
+				stmt.setString(2, user.getSenha());
 
 				rS = stmt.executeQuery();
 				if (rS.next()) {
@@ -40,8 +41,8 @@ public class UserDao {
 				}
 			} else {
 				stmt = con.prepareStatement("Select * from usuario where usuario = ? and senha = ?");
-				stmt.setString(1, login);
-				stmt.setString(2, senha);
+				stmt.setString(1, user.getLogin());
+				stmt.setString(2, user.getSenha());
 
 				rS = stmt.executeQuery();
 
@@ -57,16 +58,18 @@ public class UserDao {
 
 	}
 
-	public void registerFirstLogin(String login, String senha) {
+	public void registerFirstLogin(User user) {
 		try {
 			stmt = con.prepareStatement("update usuario set usuario = ?,senha = ? where id = 1");
-			stmt.setString(1, login);
-			stmt.setString(2, senha);
+			stmt.setString(1, user.getLogin());
+			stmt.setString(2, user.getSenha());
 
 			stmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally {
+			ConnectionFactory.closeConnection(con, stmt);
 		}
 	}
 
@@ -75,16 +78,18 @@ public class UserDao {
 		lW.setVisible(false);
 	}
 	
-	public void registerUser(String usuario,String senha) {
+	public void registerUser(User user) {
 		try {
 			stmt = con.prepareStatement("insert into usuario (usuario,senha) values(?,?)");
-			stmt.setString(1, usuario);
-			stmt.setString(2, senha);
+			stmt.setString(1, user.getLogin());
+			stmt.setString(2, user.getSenha());
 			
 			stmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally {
+			ConnectionFactory.closeConnection(con, stmt);
 		}
 		
 	}

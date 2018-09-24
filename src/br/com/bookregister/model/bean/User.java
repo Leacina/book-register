@@ -1,32 +1,18 @@
 package br.com.bookregister.model.bean;
 
 public class User {
-	public static String ADMINISTRADOR = "Administrador";
-	public static String CONVIDADO = "Convidado";
-	
-	private Integer id;
+
 	private String senha;
 	private String login;
-	private String perfil;
 
 	public User() {
 	}
 
-	public User(Integer id, String login, String senha, String perfil) {
-		this.id = id;
+	public User(String login, String senha) {
 		this.senha = senha;
 		this.login = login;
-		this.perfil = perfil;
 	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
+	
 	public String getSenha() {
 		return senha;
 	}
@@ -41,21 +27,5 @@ public class User {
 
 	public void setLogin(String login) {
 		this.login = login;
-	}
-
-	public String getPerfil() {
-		return perfil;
-	}
-
-	public void setPerfil(String perfil) {
-		this.perfil = perfil;
-	}
-	
-	public Boolean possuiPerfilConvidado() {
-		return CONVIDADO.equals(getPerfil());
-	}
-	
-	public Boolean possuiPerfilAdministrador() {
-		return ADMINISTRADOR.equals(getPerfil());
 	}
 }

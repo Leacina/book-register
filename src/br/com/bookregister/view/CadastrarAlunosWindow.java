@@ -16,6 +16,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 
+import br.com.bookregister.model.bean.Aluno;
+import br.com.bookregister.model.dao.AlunoDao;
+
 public class CadastrarAlunosWindow extends AbstractWindowFrame{
 	private static final long serialVersionUID = -4479891238469664919L;
 
@@ -279,34 +282,13 @@ public class CadastrarAlunosWindow extends AbstractWindowFrame{
 		// Listeners troca comboboxes
 		cbxPais.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String paisSelecionado = (String) cbxPais.getSelectedItem();
-
-				// Reseta estados e cidades
-				cbxUf.removeAllItems();
-				cbxUf.addItem("-Selecione-");
-				cbxCidade.removeAllItems();
-				cbxCidade.addItem("-Selecione-");
-
-				if (paisSelecionado == null) {
-					return;
-				}
+				
 			}
 		});
 
 		cbxUf.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String paisSelecionado = (String) cbxPais.getSelectedItem();
-				String estadoSelecionado = (String) cbxUf.getSelectedItem();
-
-				// Reseta estados e cidades
-				cbxCidade.removeAllItems();
-				cbxCidade.addItem("-Selecione-");
-
-				if (paisSelecionado == null || estadoSelecionado == null) {
-					return;
-				}
-
-				// Adiciona opções estados
+				
 			}
 		});
 
@@ -338,6 +320,29 @@ public class CadastrarAlunosWindow extends AbstractWindowFrame{
 		if(validarCamposObrigatorios()) {
 			JOptionPane.showMessageDialog(rootPane, "Campos obrigatórios (*) não preenchidos!", "", JOptionPane.ERROR_MESSAGE, null);
 			return;
+		}else {
+			Aluno aluno = new Aluno();
+			AlunoDao aD = new AlunoDao();
+			
+			aluno.setCodAluno(txfCod.getText());
+			aluno.setNomeAluno(txfNome.getText());
+			String auxSexo = cbxGenero.getSelectedItem().toString();
+			aluno.setSexo(auxSexo);
+			aluno.setDataNascimento(txfData.getText());
+			aluno.setTelefone(txfFone.getText());
+			aluno.setCelular(txfCel.getText());
+			aluno.setCep(txfCep.getText());
+			aluno.setEmail(txfEmail.getText());
+			aluno.setObservacao(txfObs.getText());
+			aluno.setEndereco(txfEnder.getText());
+			aluno.setComplemento(txfComplemen.getText());
+			aluno.setBairro(txfBairro.getText());
+			aluno.setNumero("128");
+			aluno.setCidade("Içara");
+			aluno.setUf("SC");
+			aluno.setPais("Brasil");
+			
+			aD.registerStudent(aluno);
 		}
 	}
 	
@@ -349,9 +354,9 @@ public class CadastrarAlunosWindow extends AbstractWindowFrame{
 			txfEnder.getText().isEmpty() ||
 			txfBairro.getText().isEmpty() ||
 			"-Selecione-".equals(cbxGenero.getSelectedItem()) ||
-			"-Selecione-".equals(cbxUf.getSelectedItem()) ||
-			"-Selecione-".equals(cbxPais.getSelectedItem()) ||
-			"-Selecione-".equals(cbxCidade.getSelectedItem()) ||
+		//	"-Selecione-".equals(cbxUf.getSelectedItem()) ||
+		//	"-Selecione-".equals(cbxPais.getSelectedItem()) ||
+			//"-Selecione-".equals(cbxCidade.getSelectedItem()) ||
 			txfData.getText().isEmpty() ||
 			txfFone.getText().isEmpty() ||
 			txfCel.getText().isEmpty() ||

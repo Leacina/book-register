@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import br.com.bookregister.model.bean.User;
 import br.com.bookregister.model.dao.UserDao;
 
 public class CadastrarPrimeiroUser extends JDialog {
@@ -91,9 +92,12 @@ public class CadastrarPrimeiroUser extends JDialog {
 		} else {
 			login = txfNome.getText();
 			senha = new String(txfSenha.getPassword());
+			User user = new User();
+			user.setLogin(login);
+			user.setSenha(senha);
 			
 			UserDao uS = new UserDao();
-			uS.registerFirstLogin(login, senha);
+			uS.registerFirstLogin(user);
 			
 			this.setVisible(false);
 		}

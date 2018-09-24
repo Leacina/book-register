@@ -1,5 +1,6 @@
 package br.com.bookregister.view;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Rectangle;
@@ -10,9 +11,12 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -56,11 +60,22 @@ public class Window extends JFrame {
 
 	private void inicializar() {
 		String dataLogin = getDateTime();
-		this.setTitle("Controle de livros v0.0.0-1      " + " - Ultimo Login: " + dataLogin);
+		this.setTitle("Controle de livros v0.0.0-1   " + " Ultimo Login: " + dataLogin);
 		this.setJMenuBar(getWindowMenuBar());
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		this.setBounds(new Rectangle(0, 0, 796, 713));
 		this.setFocusableWindowState(true);
+		
+		JLabel iconSystem;
+		
+		Icon iconeSystem = new ImageIcon(getClass().getResource("/br/com/bookregister/icons/iconSystem.jpg"));
+		iconSystem = new JLabel(iconeSystem);
+		iconSystem.setBounds(450, 120, 432, 402);
+		iconSystem.setBackground(new Color(235, 223, 253));
+		iconSystem.setBackground(getBackground());
+		iconSystem.setIcon(iconeSystem);
+		iconSystem.setToolTipText("Atualizar Campos");
+		getContentPane().add(iconSystem);
 	}
 
 	/*
@@ -307,5 +322,6 @@ public class Window extends JFrame {
 					null);
 		}
 	}
+	
 
 }
