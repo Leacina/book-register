@@ -74,7 +74,6 @@ public class Window extends JFrame {
 		iconSystem.setBackground(new Color(235, 223, 253));
 		iconSystem.setBackground(getBackground());
 		iconSystem.setIcon(iconeSystem);
-		iconSystem.setToolTipText("Atualizar Campos");
 		getContentPane().add(iconSystem);
 	}
 

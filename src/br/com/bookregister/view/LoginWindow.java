@@ -138,7 +138,8 @@ public class LoginWindow extends JFrame {
 	public static void main(final String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				new LoginWindow().setVisible(true);
+				/*Feito para testes------->*/   new Window().setVisible(true);
+				//new LoginWindow().setVisible(true);
 			}
 		});
 	}
