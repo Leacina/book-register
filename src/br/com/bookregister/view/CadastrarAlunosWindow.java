@@ -37,8 +37,9 @@ public class CadastrarAlunosWindow extends AbstractWindowFrame{
 	private JComboBox<String> cbxGenero, cbxCidade,cbxProfessor;
 	private JButton btnSalvar, btnLimpar;
 	private JLabel labes;
-	private JFormattedTextField txfData, txfFone, txfCel, txfCep, txfNum;
-
+	private JFormattedTextField txfData, txfFone, txfCel, txfNum;
+	private AlunoDao aD = new AlunoDao();
+	
 	public CadastrarAlunosWindow() {
 		super("Cadastrar Aluno");
 		criarComponentes();
@@ -73,6 +74,7 @@ public class CadastrarAlunosWindow extends AbstractWindowFrame{
 		txfCod.setToolTipText("Digite o código do aluno");
 		getContentPane().add(txfCod);
 		txfCod.addKeyListener((KeyListener) acao);
+		txfCod.setText(aD.getCodigoAluno());
 		txfCod.setEnabled(false);
 		
 		//Cadastro do professor de um determinado aluno
@@ -295,14 +297,12 @@ public class CadastrarAlunosWindow extends AbstractWindowFrame{
 			Aluno aluno = new Aluno();
 			AlunoDao aD = new AlunoDao();
 			
-			aluno.setCodAluno(txfCod.getText());
-			aluno.setNomeAluno(txfNome.getText());
+			aluno.setNome(txfNome.getText());
 			String auxSexo = cbxGenero.getSelectedItem().toString();
 			aluno.setSexo(auxSexo);
 			aluno.setDataNascimento(txfData.getText());
 			aluno.setTelefone(txfFone.getText());
 			aluno.setCelular(txfCel.getText());
-			aluno.setCep(txfCep.getText());
 			aluno.setEmail(txfEmail.getText());
 			aluno.setObservacao(txfObs.getText());
 			aluno.setEndereco(txfEnder.getText());
@@ -310,8 +310,7 @@ public class CadastrarAlunosWindow extends AbstractWindowFrame{
 			aluno.setBairro(txfBairro.getText());
 			aluno.setNumero("128");
 			aluno.setCidade("Içara");
-			aluno.setUf("SC");
-			aluno.setPais("Brasil");
+			aluno.setProfessor("Claudionor");
 			
 			aD.registerStudent(aluno);
 		}
@@ -330,8 +329,8 @@ public class CadastrarAlunosWindow extends AbstractWindowFrame{
 			//"-Selecione-".equals(cbxCidade.getSelectedItem()) ||
 			txfData.getText().isEmpty() ||
 			txfFone.getText().isEmpty() ||
-			txfCel.getText().isEmpty() ||
-			txfCep.getText().isEmpty()
+			txfCel.getText().isEmpty() 
+		
 			) {
 			return true;
 		}
@@ -355,7 +354,6 @@ public class CadastrarAlunosWindow extends AbstractWindowFrame{
 		txfData.setText("");
 		txfFone.setText("");
 		txfCel.setText("");
-		txfCep.setText("");
-
+	
 	}
 }
