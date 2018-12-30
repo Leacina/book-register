@@ -42,6 +42,16 @@ public class CadastrarUsuarioWindow extends AbstractWindowFrame{
 	public CadastrarUsuarioWindow() {
 		super("Cadastrar Usuário");
 		criarComponentes();
+		
+		JLabel icon;
+		
+		Icon icone = new ImageIcon(getClass().getResource("/br/com/bookregister/icons/CadastroUsuario.png"));
+		icon = new JLabel(icone);
+		icon.setBounds(620, 100, 50, 50);
+		icon.setBackground(new Color(235, 223, 253));
+		icon.setBackground(getBackground());
+		icon.setIcon(icone);
+		getContentPane().add(icon);
 	}
 
 	private void criarComponentes() {

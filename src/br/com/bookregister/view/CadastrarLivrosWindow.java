@@ -45,16 +45,25 @@ public class CadastrarLivrosWindow extends AbstractWindowFrame{
 		
 		//TODO: Adicionar imagem abaixo com opacidade menor.
 		
-		/*JLabel iconSystem;
+		JLabel iconSystem;
 		
-		Icon iconeSystem = new ImageIcon(getClass().getResource("/br/com/bookregister/icons/pecas_fundo1.png"));
+		Icon iconeSystem = new ImageIcon(getClass().getResource("/br/com/bookregister/icons/cadastroLivro.png"));
 		iconSystem = new JLabel(iconeSystem);
-		iconSystem.setBounds(450, 120, 432, 402);
+		iconSystem.setBounds(545, 60, 100, 100);
 		iconSystem.setBackground(new Color(235, 223, 253));
 		iconSystem.setBackground(getBackground());
 		iconSystem.setIcon(iconeSystem);
-		iconSystem.setToolTipText("Atualizar Campos");
-		getContentPane().add(iconSystem);*/
+		getContentPane().add(iconSystem);
+		
+		JLabel icon;
+		
+		Icon icone = new ImageIcon(getClass().getResource("/br/com/bookregister/icons/cadastro.png"));
+		icon = new JLabel(icone);
+		icon.setBounds(620, 60, 100, 100);
+		icon.setBackground(new Color(235, 223, 253));
+		icon.setBackground(getBackground());
+		icon.setIcon(icone);
+		getContentPane().add(icon);
 	}
 
 	public void criarComponentes() {

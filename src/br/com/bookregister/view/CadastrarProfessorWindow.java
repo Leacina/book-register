@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -25,6 +27,26 @@ public class CadastrarProfessorWindow extends AbstractWindowFrame{
 	public CadastrarProfessorWindow() {
 		super("Cadastrar Professor");
 		criarComponentes();
+		
+		JLabel iconSystem;
+		
+		Icon iconeSystem = new ImageIcon(getClass().getResource("/br/com/bookregister/icons/cadastroLivro.png"));
+		iconSystem = new JLabel(iconeSystem);
+		iconSystem.setBounds(545, 60, 100, 100);
+		iconSystem.setBackground(new Color(235, 223, 253));
+		iconSystem.setBackground(getBackground());
+		iconSystem.setIcon(iconeSystem);
+		getContentPane().add(iconSystem);
+		
+		JLabel icon;
+		
+		Icon icone = new ImageIcon(getClass().getResource("/br/com/bookregister/icons/cadastro.png"));
+		icon = new JLabel(icone);
+		icon.setBounds(620, 60, 100, 100);
+		icon.setBackground(new Color(235, 223, 253));
+		icon.setBackground(getBackground());
+		icon.setIcon(icone);
+		getContentPane().add(icon);
 	}
 	
 	public void criarComponentes() {
