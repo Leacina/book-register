@@ -35,6 +35,7 @@ public class Window extends JFrame {
 
 	private CadastrarUsuarioWindow frameCadastrarUsuario;
 	private CadastrarAlunosWindow frameCadastrarAlunos;
+	private CadastrarLivrosWindow frameCadastrarLivros;
 
 	private JDesktopPane desktop;
 
@@ -153,7 +154,8 @@ public class Window extends JFrame {
 
 		menuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+				frameCadastrarLivros = new CadastrarLivrosWindow();
+				abrirFrame(frameCadastrarLivros);
 			}
 		});
 

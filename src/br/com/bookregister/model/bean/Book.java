@@ -11,33 +11,49 @@ package br.com.bookregister.model.bean;
  */
 public class Book {
     
-    private String title;
-    private String descrition;
-    private String actor;
+    private String codigo;
+    private String proprietario;
+    private String nome;
+    private String autor;
+    private String ano;
+    private String status;
     
-    public void setTitle(String title){
-        this.title = title;
-    }
+    public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	public String getAutor() {
+		return autor;
+	}
+	public void setAutor(String autor) {
+		this.autor = autor;
+	}
+	public String getAno() {
+		return ano;
+	}
+	public void setAno(String ano) {
+		this.ano = ano;
+	}
+	public String getCodigo() {
+		return codigo;
+	}
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
+	}
+	public String getProprietario() {
+		return proprietario;
+	}
+	public void setProprietario(String proprietario) {
+		this.proprietario = proprietario;
+	}
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
     
-    public String getTitle(){
-        return title;
-    }
-    
-    
-    public void setDescrition(String descrition){
-        this.descrition = descrition;
-    }
-    
-    public String getDescrition(){
-        return descrition;
-    }
-    
-    
-    public void setActor(String actor){
-        this.actor = actor;
-    }
-    
-    public String getActor(){
-        return actor;
-    }
+   
 }
