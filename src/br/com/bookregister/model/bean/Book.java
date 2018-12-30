@@ -11,13 +11,20 @@ package br.com.bookregister.model.bean;
  */
 public class Book {
     
-    private String codigo;
+	private int    id;
+	private String codigo;
     private String proprietario;
     private String nome;
     private String autor;
     private String ano;
     private String status;
     
+    public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}    
     public String getStatus() {
 		return status;
 	}

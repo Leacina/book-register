@@ -7,6 +7,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.text.ParseException;
+import java.util.List;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -19,7 +20,9 @@ import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 
 import br.com.bookregister.model.bean.Aluno;
+import br.com.bookregister.model.bean.Professor;
 import br.com.bookregister.model.dao.AlunoDao;
+import br.com.bookregister.model.dao.ProfessorDao;
 
 public class CadastrarAlunosWindow extends AbstractWindowFrame{
 	private static final long serialVersionUID = -4479891238469664919L;
@@ -39,9 +42,12 @@ public class CadastrarAlunosWindow extends AbstractWindowFrame{
 	private JLabel labes;
 	private JFormattedTextField txfData, txfFone, txfCel, txfNum;
 	private AlunoDao aD = new AlunoDao();
+	private ProfessorDao pD = new ProfessorDao();
+	private List<Professor> listaProfessor = null;
 	
 	public CadastrarAlunosWindow() {
 		super("Cadastrar Aluno");
+		listaProfessor = pD.getProfessores(); 
 		criarComponentes();
 		
 		//TODO: Adicionar imagem abaixo com opacidade menor.
@@ -74,7 +80,7 @@ public class CadastrarAlunosWindow extends AbstractWindowFrame{
 		txfCod.setToolTipText("Digite o código do aluno");
 		getContentPane().add(txfCod);
 		txfCod.addKeyListener((KeyListener) acao);
-		txfCod.setText(aD.getCodigoAluno());
+		txfCod.setText(aD.getCodigoProximoAluno());
 		txfCod.setEnabled(false);
 		
 		//Cadastro do professor de um determinado aluno
@@ -89,6 +95,7 @@ public class CadastrarAlunosWindow extends AbstractWindowFrame{
 		cbxProfessor = new JComboBox<String>();
 		cbxProfessor.addItem("-Selecione-");
 		cbxProfessor.setBounds(610, 30, 220, 28);
+		listaProfessor.forEach(p -> cbxProfessor.addItem(p.getNome()));
 		cbxProfessor.setToolTipText("Informe o professor do aluno");
 		getContentPane().add(cbxProfessor);
 		cbxProfessor.addKeyListener((KeyListener) acao);	
