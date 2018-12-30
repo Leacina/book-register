@@ -18,8 +18,15 @@ public class Book {
     private String autor;
     private String ano;
     private String status;
+    private int    emprestimo;
     
-    public int getId() {
+    public int getEmprestimo() {
+		return emprestimo;
+	}
+	public void setEmprestimo(int emprestimo) {
+		this.emprestimo = emprestimo;
+	}
+	public int getId() {
 		return id;
 	}
 	public void setId(int id) {

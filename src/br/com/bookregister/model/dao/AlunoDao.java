@@ -126,6 +126,30 @@ public class AlunoDao {
 		
 		return listaAlunos;
 	}
+	
+	public Aluno buscarAlunoPorId(int id) {
+		
+		try {
+			stmt = con.prepareStatement("select * from alunos");
+
+			rS = stmt.executeQuery();
+
+			while(rS.next()) {
+				Aluno aluno = new Aluno();
+				if(rS.getInt("id") == id) {
+					aluno.setNome(rS.getString("nome"));
+					return aluno;
+				}
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+		return null;
+	}
+	
 }
 
 

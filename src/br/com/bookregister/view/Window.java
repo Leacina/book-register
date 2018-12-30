@@ -39,7 +39,9 @@ public class Window extends JFrame {
 	private CadastrarAlunosWindow frameCadastrarAlunos;
 	private CadastrarLivrosWindow frameCadastrarLivros;
 	private CadastrarProfessorWindow frameCadastrarProfessor;
+	private DevolucaoLivroWindow frameDevolucaoLivro;
 	private AlugarLivroWindow frameAlugarLivro;
+	private ListarAlunosWindow frameListarAlunos;
 
 	private JDesktopPane desktop;
 
@@ -132,7 +134,11 @@ public class Window extends JFrame {
 
 		menuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+				frameListarAlunos = new ListarAlunosWindow(desktop);
+				abrirFrame(frameListarAlunos);
+				
+				// Garante que a grid se encaixe na tela depois que a tela Ã© criada
+				frameListarAlunos.redimensionarGrid(frameListarAlunos.getGridContent());
 			}
 		});
 
@@ -330,7 +336,10 @@ public class Window extends JFrame {
 		menuEmprestimo.setFont(getDefaultFont());
 
 		menuEmprestimo.add(getMenuItemAlugarLivro());
-
+		menuEmprestimo.add(getMenuItemListarLivrosEmprestados());
+		menuEmprestimo.addSeparator();
+		menuEmprestimo.add(getMenuItemDevolverLivro());
+		
 		return menuEmprestimo;
 	}
 
@@ -343,6 +352,35 @@ public class Window extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				frameAlugarLivro = new AlugarLivroWindow();
 				abrirFrame(frameAlugarLivro);
+			}
+		});
+
+		return menuItem;
+	}
+	
+	private JMenuItem getMenuItemListarLivrosEmprestados() {
+		JMenuItem menuItem = new JMenuItem();
+		menuItem.setText("Livros Alugado");
+		menuItem.setFont(getDefaultFont());
+
+		menuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+
+		return menuItem;
+	}
+	
+	private JMenuItem getMenuItemDevolverLivro() {
+		JMenuItem menuItem = new JMenuItem();
+		menuItem.setText("Devolução de Livros");
+		menuItem.setFont(getDefaultFont());
+
+		menuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frameDevolucaoLivro = new DevolucaoLivroWindow();
+				abrirFrame(frameDevolucaoLivro);
 			}
 		});
 
