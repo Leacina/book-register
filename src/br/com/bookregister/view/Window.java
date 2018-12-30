@@ -31,11 +31,14 @@ public class Window extends JFrame {
 	private JMenu menuAlunos;
 	private JMenu menuLivros;
 	private JMenu menuUsuarios;
+	private JMenu menuProfessor;
+	private JMenu menuEmprestimo;
 	private JMenu menuOpcao;
 
 	private CadastrarUsuarioWindow frameCadastrarUsuario;
 	private CadastrarAlunosWindow frameCadastrarAlunos;
 	private CadastrarLivrosWindow frameCadastrarLivros;
+	private CadastrarProfessorWindow frameCadastrarProfessor;
 
 	private JDesktopPane desktop;
 
@@ -66,9 +69,9 @@ public class Window extends JFrame {
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		this.setBounds(new Rectangle(0, 0, 796, 713));
 		this.setFocusableWindowState(true);
-		
+
 		JLabel iconSystem;
-		
+
 		Icon iconeSystem = new ImageIcon(getClass().getResource("/br/com/bookregister/icons/iconSystem.jpg"));
 		iconSystem = new JLabel(iconeSystem);
 		iconSystem.setBounds(450, 120, 432, 402);
@@ -85,6 +88,8 @@ public class Window extends JFrame {
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.add(getMenuAlunos());
 		menuBar.add(getMenuLivros());
+		menuBar.add(getMenuProfessor());
+		menuBar.add(getMenuEmprestimo());
 		menuBar.add(getMenuUsuarios());
 		menuBar.add(getMenuOpcao());
 		return menuBar;
@@ -276,6 +281,72 @@ public class Window extends JFrame {
 		return menuItem;
 	}
 
+	// Menu Professores
+	private JMenu getMenuProfessor() {
+		menuProfessor = new JMenu();
+		menuProfessor.setText("Professor");
+		menuProfessor.setFont(getDefaultFont());
+
+		menuProfessor.add(getMenuItemCadastrarProfessor());
+		menuProfessor.add(getMenuItemListarProfessor());
+
+		return menuProfessor;
+	}
+
+	private JMenuItem getMenuItemCadastrarProfessor() {
+		JMenuItem menuItem = new JMenuItem();
+		menuItem.setText("Cadastrar");
+		menuItem.setFont(getDefaultFont());
+
+		menuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frameCadastrarProfessor = new CadastrarProfessorWindow();
+				abrirFrame(frameCadastrarProfessor);
+			}
+		});
+
+		return menuItem;
+	}
+
+	private JMenuItem getMenuItemListarProfessor() {
+		JMenuItem menuItem = new JMenuItem();
+		menuItem.setText("Listar");
+		menuItem.setFont(getDefaultFont());
+
+		menuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// TODO:Lista de professores
+			}
+		});
+
+		return menuItem;
+	}
+
+	// Menu Emprestimo
+	private JMenu getMenuEmprestimo() {
+		menuEmprestimo = new JMenu();
+		menuEmprestimo.setText("Empréstimo");
+		menuEmprestimo.setFont(getDefaultFont());
+
+		menuEmprestimo.add(getMenuItemAlugarLivro());
+
+		return menuEmprestimo;
+	}
+
+	private JMenuItem getMenuItemAlugarLivro() {
+		JMenuItem menuItem = new JMenuItem();
+		menuItem.setText("Alugar Livro");
+		menuItem.setFont(getDefaultFont());
+
+		menuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// TODO:Cadastro de professores
+			}
+		});
+
+		return menuItem;
+	}
+
 	/*
 	 * HELPERS
 	 */
@@ -323,6 +394,5 @@ public class Window extends JFrame {
 					null);
 		}
 	}
-	
 
 }
