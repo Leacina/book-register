@@ -1,6 +1,6 @@
 # Cadastro de Livros
 
-#### O sistema Cadastro Acx disponibiliza recursos na parte de cadastro e listagens de Aluno e Livros. Além de possuir a parte de armazenamento de dados da Acx, ele possui telas para alugar e devolver livros para os alunos cadastrados no sistema.
+#### O sistema Cadastro Acx (Desenvolvido em Java), disponibiliza recursos na parte de cadastro e listagens de Aluno e Livros. Além de possuir a parte de armazenamento de dados da Acx, ele possui telas para alugar e devolver livros para os alunos cadastrados no sistema.
 #### A seguir, temos a tela principal do sistema, onde possui os menus disponibilizados para o usuario. Obs: Todos os campos de cadastras abaixo, poderam ser vizualizado nos seus respectivos menus de listagens.
 #####
 #####
