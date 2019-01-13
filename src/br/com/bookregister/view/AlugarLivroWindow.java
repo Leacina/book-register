@@ -114,5 +114,12 @@ public class AlugarLivroWindow extends AbstractWindowFrame{
 		
 		bD.alugarLivro(Integer.parseInt(bD.getCodigoBook(cbxLivroEmprestado.getSelectedItem().toString())), 
 				Integer.parseInt(aD.getCodigoAluno(cbxAlunoEmprestimo.getSelectedItem().toString())));
+		
+		limparFormulario();
+	}
+	
+	public void limparFormulario() {
+		cbxAlunoEmprestimo.setSelectedItem(0);
+		cbxLivroEmprestado.setSelectedIndex(0);
 	}
 }

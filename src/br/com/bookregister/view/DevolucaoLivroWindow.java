@@ -115,13 +115,17 @@ public class DevolucaoLivroWindow extends AbstractWindowFrame {
 		getContentPane().add(btnSalvar);
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				alugarLivro();
+				devolverLivro();
 			}
 		});
 	}
 
-	public void alugarLivro() {
-
+	public void devolverLivro() {
+		
+		BookDao bookDao = new BookDao();
+		
+		bookDao.devolverLivro(cbxLivroEmprestado.getSelectedItem().toString());
+	    limparCampos();
 	}
 	
 	public int buscarIdAluno() {
@@ -133,5 +137,10 @@ public class DevolucaoLivroWindow extends AbstractWindowFrame {
 		}
 		
 		return -1;
+	}
+	
+	public void limparCampos() {
+		cbxLivroEmprestado.setSelectedItem("");
+		txfAlunoDevolucao.setText("");
 	}
 }

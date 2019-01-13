@@ -140,4 +140,21 @@ public class BookDao {
 			e.printStackTrace();
 		}
 	}
+	
+	public void devolverLivro(String nomeLivro) {
+		try {
+			stmt = con.prepareStatement("update livro set emprestimo_aluno = ?,status = ? where nome = ?");
+			
+			stmt.setString(1, null);
+			stmt.setString(2, "Disponivel");
+			stmt.setString(3, nomeLivro);
+					
+			stmt.executeUpdate();
+
+			JOptionPane.showMessageDialog(null, "Devolução de livro realizada com sucesso!");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }
