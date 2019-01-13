@@ -106,7 +106,7 @@ public class DevolucaoLivroWindow extends AbstractWindowFrame {
 		btnLimpar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
+				limparCampos();
 			}
 		});
 
@@ -140,7 +140,7 @@ public class DevolucaoLivroWindow extends AbstractWindowFrame {
 	}
 	
 	public void limparCampos() {
-		cbxLivroEmprestado.setSelectedItem("");
+		cbxLivroEmprestado.setSelectedIndex(0);
 		txfAlunoDevolucao.setText("");
 	}
 }
