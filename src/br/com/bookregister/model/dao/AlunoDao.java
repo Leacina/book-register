@@ -163,6 +163,42 @@ public class AlunoDao {
 		return new Aluno();
 	}
 	
+public List<Aluno> buscarAlunoPorNome(String nome) {
+		
+		try {
+			stmt = con.prepareStatement("select * from alunos where nome like ?");
+
+			stmt.setString(1, '%'+nome+'%');
+			rS = stmt.executeQuery();
+
+			while(rS.next()) {
+				Aluno aluno = new Aluno();
+				aluno.setId(rS.getInt("id"));
+				aluno.setNome(rS.getString("nome"));
+				aluno.setDataNascimento(rS.getString("data_nascimento"));
+				aluno.setSexo(rS.getString("sexo"));
+				aluno.setTelefone(rS.getString("telefone"));
+				aluno.setCelular(rS.getString("celular"));
+				aluno.setEmail(rS.getString("email"));
+				aluno.setObservacao(rS.getString("observacao"));
+				aluno.setEndereco(rS.getString("endereco"));
+				aluno.setComplemento(rS.getString("complemento"));
+				aluno.setCidade(rS.getString("cidade"));
+				aluno.setBairro(rS.getString("bairro"));
+				aluno.setProfessor(rS.getString("professor_aluno"));
+					
+				listaAlunos.add(aluno);
+				
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+		return listaAlunos;
+	}
+	
 }
 
 

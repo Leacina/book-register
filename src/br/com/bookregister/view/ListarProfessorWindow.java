@@ -20,6 +20,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 																
 import br.com.bookregister.model.bean.Professor;
+import br.com.bookregister.model.dao.BookDao;
 import br.com.bookregister.model.dao.ProfessorDao;
 import br.com.bookregister.table.model.ProfessorTableModel;
 
@@ -144,7 +145,13 @@ public class ListarProfessorWindow extends AbstractGridWindow{
 	}
 
 	public void buscarProfessor() {
-	
+		model.limpar();
+		listaProfessores.clear();
+		
+		ProfessorDao professorDao = new ProfessorDao();
+		listaProfessores = professorDao.getProfessoresPorNome(txfBuscar.getText());
+		
+		model.addListaDeProfessores(listaProfessores);
 	}
 	
 	private void abrirFrame(AbstractWindowFrame frame) {

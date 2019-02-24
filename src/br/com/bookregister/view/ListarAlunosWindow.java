@@ -142,7 +142,13 @@ public class ListarAlunosWindow extends AbstractGridWindow {
 	}
 
 	public void buscarAluno() {
-	
+		model.limpar();
+		listaAlunos.clear();
+		
+		AlunoDao alunoDao = new AlunoDao();
+		listaAlunos = alunoDao.buscarAlunoPorNome(txfBuscar.getText());
+		
+		model.addListaDeAlunos(listaAlunos);
 	}
 	
 	private void abrirFrame(AbstractWindowFrame frame) {

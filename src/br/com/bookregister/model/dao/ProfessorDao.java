@@ -64,4 +64,31 @@ public class ProfessorDao {
 		
 		return listaProfessor;
 	}
+	
+
+	public List<Professor> getProfessoresPorNome(String nome){
+		
+		try {
+			stmt = con.prepareStatement("select * from professor where nome like ?");
+			
+			stmt.setString(1,"%" + nome + "%");
+			rS = stmt.executeQuery();
+			
+			while(rS.next()) {
+				Professor professor = new Professor();
+				
+				professor.setId(rS.getInt("id"));
+			    professor.setNome(rS.getString("nome"));
+			    professor.setDescricao(rS.getString("descricao"));
+			    
+			    listaProfessor.add(professor);
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return listaProfessor;
+	}
+	 
 }

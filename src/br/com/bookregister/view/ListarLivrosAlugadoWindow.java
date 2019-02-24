@@ -148,7 +148,13 @@ public class ListarLivrosAlugadoWindow extends AbstractGridWindow{
 	}
 
 	public void buscarLivros() {
-	
+		model.limpar();
+		listaLivros.clear();
+		
+		BookDao livroDao = new BookDao();
+		listaLivros = livroDao.getLivrosPorNome(txfBuscar.getText());
+		
+		model.addListaDeLivros(listaLivros);
 	}
 	
 	private void abrirFrame(AbstractWindowFrame frame) {
