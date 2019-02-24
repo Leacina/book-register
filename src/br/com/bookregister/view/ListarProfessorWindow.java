@@ -8,7 +8,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.swing.JButton;
 import javax.swing.JDesktopPane;
@@ -19,43 +18,46 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+																
+import br.com.bookregister.model.bean.Professor;
+import br.com.bookregister.model.dao.ProfessorDao;
+import br.com.bookregister.table.model.ProfessorTableModel;
 
-import br.com.bookregister.model.bean.Aluno;
-import br.com.bookregister.model.dao.AlunoDao;
-import br.com.bookregister.table.model.AlunoTableModel;
-import br.com.bookregister.view.InformacoesAlunosWindow;
+public class ListarProfessorWindow extends AbstractGridWindow{
 
-public class ListarAlunosWindow extends AbstractGridWindow {
-	private static final long serialVersionUID = 5436871882222628866L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	
-	AlunoDao aD = new AlunoDao();
+    ProfessorDao pD = new ProfessorDao();
 	
 	KeyAdapter acao = new KeyAdapter() {
 		@Override
 		public void keyPressed(java.awt.event.KeyEvent e) {
 			if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-				buscarAluno();
+				buscarProfessor();
 			}
 		}
 		};
 
 	private JButton botaoExcluir;
 	private JButton botaoEditar;
-	private String idSelecionado;
 	
 	//Componentes Para Busca
 	private JTextField txfBuscar;
 	private JButton btnBuscar;
+	private String idSelecionado;
 	private JButton btnLimparBusca;
 	private JLabel labelInformacao;
 
-	private JTable jTableAlunos;
-	private AlunoTableModel model;
-	private List<Aluno> listaAlunos = new ArrayList<Aluno>();
+	private JTable jTableProfessores;
+	private ProfessorTableModel model;
+	private List<Professor> listaProfessores = new ArrayList<Professor>();
 	private JDesktopPane desktop;
 	
-	public ListarAlunosWindow(JDesktopPane desktop) {
-		super("Lista de Alunos");
+	public ListarProfessorWindow(JDesktopPane desktop) {
+		super("Lista de Professores");
 
 		this.desktop = desktop;
 		criarComponentes();
@@ -100,7 +102,7 @@ public class ListarAlunosWindow extends AbstractGridWindow {
 		getContentPane().add(btnBuscar);
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {				
-					buscarAluno();	
+					buscarProfessor();	
 			}
 		});
 		
@@ -115,8 +117,8 @@ public class ListarAlunosWindow extends AbstractGridWindow {
 				txfBuscar.setText("");
 				model.limpar();
 				try {
-					listaAlunos = aD.getAlunos();
-					model.addListaDeAlunos(listaAlunos);
+					listaProfessores = pD.getProfessores();
+					model.addListaDeProfessores(listaProfessores);
 				} catch (Exception e2) {
 					System.err.printf("Erro ao iniciar lista de alunos: %s.\n", e2.getMessage());
 				}
@@ -131,8 +133,8 @@ public class ListarAlunosWindow extends AbstractGridWindow {
 					txfBuscar.setText("");
 					model.limpar();
 					try {
-						listaAlunos = aD.getAlunos();
-						model.addListaDeAlunos(listaAlunos);
+						listaProfessores = pD.getProfessores();
+						model.addListaDeProfessores(listaProfessores);
 					} catch (Exception e2) {
 						System.err.printf("Erro ao iniciar lista de alunos: %s.\n", e2.getMessage());
 					}
@@ -141,7 +143,7 @@ public class ListarAlunosWindow extends AbstractGridWindow {
 		});
 	}
 
-	public void buscarAluno() {
+	public void buscarProfessor() {
 	
 	}
 	
@@ -152,45 +154,37 @@ public class ListarAlunosWindow extends AbstractGridWindow {
 	}
 
 	private void carregarGrid() {
-		model = new AlunoTableModel();
-		jTableAlunos = new JTable(model);
+		model = new ProfessorTableModel();
+		jTableProfessores = new JTable(model);
 
 		// Habilita a seleção por linha
-		jTableAlunos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		jTableProfessores.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
 		// Ação Seleção de uma linha
-		jTableAlunos.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+		jTableProfessores.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent event) {
 
-				if (jTableAlunos.getSelectedRow() != -1) {
-					idSelecionado = jTableAlunos.getValueAt(jTableAlunos.getSelectedRow(), 0).toString();
+				if (jTableProfessores.getSelectedRow() != -1) {
+					idSelecionado = jTableProfessores.getValueAt(jTableProfessores.getSelectedRow(), 0).toString();
 				}
 			}
 		});
 		
 		//Double Click na linha
-		jTableAlunos.addMouseListener(new MouseAdapter() {
+		jTableProfessores.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				if (e.getClickCount() == 2) {
-					
-					Aluno aluno = aD.buscarAlunoPorId(Integer.parseInt(idSelecionado));
-					
-					if(aluno instanceof Aluno) {
-						InformacoesAlunosWindow frame = new InformacoesAlunosWindow(aluno);
-						abrirFrame(frame);					
-					}
-				}
+				
 			}
 		});
 
 		try {
-			listaAlunos = aD.getAlunos();
-			model.addListaDeAlunos(listaAlunos);
+			listaProfessores = pD.getProfessores();
+			model.addListaDeProfessores(listaProfessores);
 		} catch (Exception e) {
 			System.err.printf("Erro ao iniciar lista de alunos: %s.\n", e.getMessage());
 		}
 
-		grid = new JScrollPane(jTableAlunos);
+		grid = new JScrollPane(jTableProfessores);
 		setLayout(null);
 		redimensionarGrid(grid);
 		grid.setVisible(true);
@@ -204,5 +198,4 @@ public class ListarAlunosWindow extends AbstractGridWindow {
 		}
 	}
 
-	
 }

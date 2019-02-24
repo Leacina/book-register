@@ -45,6 +45,7 @@ public class CadastrarAlunosWindow extends AbstractWindowFrame{
 	private ProfessorDao pD = new ProfessorDao();
 	private List<Professor> listaProfessor = null;
 	
+	
 	public CadastrarAlunosWindow() {
 		super("Cadastrar Aluno");
 		listaProfessor = pD.getProfessores(); 

@@ -76,6 +76,35 @@ public class BookDao {
 		return listaLivros;
 	}
 	
+	public List<Book> getLivrosAlugado() {
+		try {
+			listaLivros.clear();
+			stmt = con.prepareStatement("select * from livro where status <> ?");
+
+			stmt.setString(1, "Disponivel");
+			rS = stmt.executeQuery();
+
+			while(rS.next()) {
+				Book book = new Book();
+				book.setId(Integer.parseInt(rS.getString("id")));
+				book.setCodigo(rS.getString("codigo"));
+				book.setNome(rS.getString("nome"));
+				book.setProprietario(rS.getString("proprietario"));
+				book.setStatus(rS.getString("status"));
+				book.setAutor(rS.getString("autor"));
+				book.setAno(rS.getString("ano"));
+				
+				listaLivros.add(book);
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+		return listaLivros;
+	}
+	
 	public List<Book> getLivrosDevolucao() {
 		try {
 			stmt = con.prepareStatement("select * from livro where status <> ?");
@@ -101,6 +130,33 @@ public class BookDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
+		
+		return listaLivros;
+	}
+	
+	public List<Book> getLivros(){
+		try {
+			listaLivros.clear(); 
+			stmt = con.prepareStatement("select * from livro");
+			
+			rS = stmt.executeQuery();
+			 
+			while(rS.next()) {
+				Book book = new Book();
+				book.setId(Integer.parseInt(rS.getString("id")));
+				book.setCodigo(rS.getString("codigo"));
+				book.setNome(rS.getString("nome"));
+				book.setProprietario(rS.getString("proprietario"));
+				book.setStatus(rS.getString("status"));
+				book.setAutor(rS.getString("autor"));
+				book.setAno(rS.getString("ano"));
+				book.setEmprestimo(rS.getInt("emprestimo_aluno"));
+				
+				listaLivros.add(book);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		
 		return listaLivros;
 	}

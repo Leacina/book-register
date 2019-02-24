@@ -205,4 +205,5 @@ public class CadastrarLivrosWindow extends AbstractWindowFrame{
 		txfProprietario.setText("");
 	
 	}
+	
 }

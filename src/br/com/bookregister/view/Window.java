@@ -35,13 +35,16 @@ public class Window extends JFrame {
 	private JMenu menuEmprestimo;
 	private JMenu menuOpcao;
 
-	private CadastrarUsuarioWindow frameCadastrarUsuario;
-	private CadastrarAlunosWindow frameCadastrarAlunos;
-	private CadastrarLivrosWindow frameCadastrarLivros;
-	private CadastrarProfessorWindow frameCadastrarProfessor;
-	private DevolucaoLivroWindow frameDevolucaoLivro;
-	private AlugarLivroWindow frameAlugarLivro;
-	private ListarAlunosWindow frameListarAlunos;
+	private CadastrarUsuarioWindow    frameCadastrarUsuario;
+	private CadastrarAlunosWindow     frameCadastrarAlunos;
+	private CadastrarLivrosWindow     frameCadastrarLivros;
+	private CadastrarProfessorWindow  frameCadastrarProfessor;
+	private DevolucaoLivroWindow      frameDevolucaoLivro;
+	private AlugarLivroWindow         frameAlugarLivro;
+	private ListarAlunosWindow        frameListarAlunos;
+	private ListarProfessorWindow     frameListarProfessores;
+	private ListarLivroWindow         frameListarLivros;
+	private ListarLivrosAlugadoWindow frameListarLivrosAlugado;
 
 	private JDesktopPane desktop;
 
@@ -181,7 +184,11 @@ public class Window extends JFrame {
 
 		menuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+				frameListarLivros = new ListarLivroWindow(desktop);
+				abrirFrame(frameListarLivros);
+				
+				// Garante que a grid se encaixe na tela depois que a tela é criada
+				frameListarLivros.redimensionarGrid(frameListarLivros.getGridContent());
 			}
 		});
 
@@ -222,7 +229,8 @@ public class Window extends JFrame {
 		JMenuItem menuItem = new JMenuItem();
 		menuItem.setText("Alterar senha");
 		menuItem.setFont(getDefaultFont());
-
+		menuItem.setEnabled(false);
+		
 		menuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -236,7 +244,8 @@ public class Window extends JFrame {
 		JMenuItem menuItem = new JMenuItem();
 		menuItem.setText("Listar");
 		menuItem.setFont(getDefaultFont());
-
+		menuItem.setEnabled(false);
+		
 		menuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -322,7 +331,11 @@ public class Window extends JFrame {
 
 		menuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// TODO:Lista de professores
+				frameListarProfessores = new ListarProfessorWindow(desktop);
+				abrirFrame(frameListarProfessores);
+				
+				// Garante que a grid se encaixe na tela depois que a tela é criada
+				frameListarProfessores.redimensionarGrid(frameListarProfessores.getGridContent());
 			}
 		});
 
@@ -365,7 +378,11 @@ public class Window extends JFrame {
 
 		menuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				frameListarLivrosAlugado = new ListarLivrosAlugadoWindow(desktop);
+				abrirFrame(frameListarLivrosAlugado);
 				
+				// Garante que a grid se encaixe na tela depois que a tela é criada
+				frameListarLivrosAlugado.redimensionarGrid(frameListarLivrosAlugado.getGridContent());
 			}
 		});
 

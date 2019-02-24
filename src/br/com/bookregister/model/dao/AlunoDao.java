@@ -79,11 +79,11 @@ public class AlunoDao {
 
 		String codigo = "0";
 		try {
-			stmt = con.prepareStatement("Select * from alunos");
+			stmt = con.prepareStatement("Select * from alunos where id = (select MAX(id) from alunos)");
 
 			rS = stmt.executeQuery();
 			if (rS.next()) {
-				codigo = rS.getString("id");
+				codigo = Integer.toString(rS.getInt("id") + 1);
 			}
 		} catch (SQLException e) {
 			// TODO: Lançar exception correta
@@ -130,16 +130,29 @@ public class AlunoDao {
 	public Aluno buscarAlunoPorId(int id) {
 		
 		try {
-			stmt = con.prepareStatement("select * from alunos");
+			stmt = con.prepareStatement("select * from alunos where id = ?");
 
+			stmt.setInt(1, id);
 			rS = stmt.executeQuery();
 
 			while(rS.next()) {
 				Aluno aluno = new Aluno();
-				if(rS.getInt("id") == id) {
-					aluno.setNome(rS.getString("nome"));
-					return aluno;
-				}
+				aluno.setId(rS.getInt("id"));
+				aluno.setNome(rS.getString("nome"));
+				aluno.setDataNascimento(rS.getString("data_nascimento"));
+				aluno.setSexo(rS.getString("sexo"));
+				aluno.setTelefone(rS.getString("telefone"));
+				aluno.setCelular(rS.getString("celular"));
+				aluno.setEmail(rS.getString("email"));
+				aluno.setObservacao(rS.getString("observacao"));
+				aluno.setEndereco(rS.getString("endereco"));
+				aluno.setComplemento(rS.getString("complemento"));
+				aluno.setCidade(rS.getString("cidade"));
+				aluno.setBairro(rS.getString("bairro"));
+				aluno.setProfessor(rS.getString("professor_aluno"));
+					
+				return aluno;
+				
 			}
 
 		} catch (SQLException e) {
@@ -147,7 +160,7 @@ public class AlunoDao {
 			e.printStackTrace();
 		} 
 		
-		return null;
+		return new Aluno();
 	}
 	
 }

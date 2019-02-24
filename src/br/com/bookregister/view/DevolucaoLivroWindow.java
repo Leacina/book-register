@@ -94,7 +94,8 @@ public class DevolucaoLivroWindow extends AbstractWindowFrame {
 			public void actionPerformed(ActionEvent e) {
 				int idAluno = buscarIdAluno();
 				
-				Aluno aluno = aD.buscarAlunoPorId(idAluno);
+				Aluno aluno = new Aluno();
+				aluno = aD.buscarAlunoPorId(idAluno);
 				txfAlunoDevolucao.setText(aluno.getNome());
 			}
 		});
