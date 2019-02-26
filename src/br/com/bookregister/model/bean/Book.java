@@ -18,6 +18,7 @@ public class Book {
     private String autor;
     private String ano;
     private String status;
+    private byte[] imagem;
     private int    emprestimo;
     
     public int getEmprestimo() {
@@ -68,6 +69,11 @@ public class Book {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-    
+	public byte[] getImagem() {
+		return imagem;
+	}
+	public void setImagem(byte[] imagem) {
+		this.imagem = imagem;
+	}
    
 }

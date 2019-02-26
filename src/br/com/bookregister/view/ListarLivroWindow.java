@@ -181,7 +181,14 @@ public class ListarLivroWindow extends AbstractGridWindow{
 		//Double Click na linha
 		jTableLivros.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
+				if (e.getClickCount() == 2) {
+				Book book = bD.getLivroPorCodigo(idSelecionado);
 				
+				if(book instanceof Book) {
+					InformacoesLivrosWindow frame = new InformacoesLivrosWindow(book);
+					abrirFrame(frame);					
+				}
+				}
 			}
 		});
 

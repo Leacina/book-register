@@ -51,9 +51,8 @@ public class InformacoesAlunosWindow extends AbstractWindowFrame{
 
 		txfCod = new JTextField(Integer.toString(alunoSelecionado.getId()));
 		txfCod.setBounds(450, 30, 135, 28);
-		txfCod.setEnabled(false);
+		txfCod.setEditable(false);
 		getContentPane().add(txfCod);
-		txfCod.setEnabled(false);
 		
 		//Cadastro do professor de um determinado aluno
 	    labes = new JLabel("*");
@@ -67,9 +66,8 @@ public class InformacoesAlunosWindow extends AbstractWindowFrame{
 		cbxProfessor = new JComboBox<String>();
 		cbxProfessor.addItem(alunoSelecionado.getProfessor());
 		cbxProfessor.setBounds(610, 30, 220, 28);
-		cbxProfessor.setEnabled(false);
+		cbxProfessor.setEditable(false);
 		getContentPane().add(cbxProfessor);	
-		cbxProfessor.setEnabled(false);
 					
 		labes = new JLabel("*");
 		labes.setForeground(Color.red);
@@ -81,7 +79,7 @@ public class InformacoesAlunosWindow extends AbstractWindowFrame{
 
 		txfNome = new JTextField(alunoSelecionado.getNome());
 		txfNome.setBounds(450, 80, 380, 28);
-		txfNome.setEnabled(false);
+		txfNome.setEditable(false);
 		getContentPane().add(txfNome);
 		
 		labes = new JLabel("*");
@@ -94,9 +92,8 @@ public class InformacoesAlunosWindow extends AbstractWindowFrame{
 
 		cbxGenero = new JComboBox<String>();
 		cbxGenero.addItem(alunoSelecionado.getSexo());
-		cbxGenero.setEnabled(false);
+		cbxGenero.setEditable(false);
 		cbxGenero.setBounds(640, 130, 190, 28);
-		cbxGenero.setToolTipText("Informe o sexo");
 		getContentPane().add(cbxGenero);
 		
 		labes = new JLabel("*");
@@ -111,8 +108,7 @@ public class InformacoesAlunosWindow extends AbstractWindowFrame{
 			txfData = new JFormattedTextField(alunoSelecionado.getDataNascimento());
 			txfData.setFocusLostBehavior(JFormattedTextField.COMMIT);
 			txfData.setBounds(450, 130, 155, 28);
-			txfData.setToolTipText("Digite a data de nascimento");
-			txfData.setEnabled(false);
+			txfData.setEditable(false);
 			getContentPane().add(txfData);
 			
 			labes = new JLabel("*");
@@ -127,7 +123,7 @@ public class InformacoesAlunosWindow extends AbstractWindowFrame{
 			txfFone.setFocusLostBehavior(JFormattedTextField.COMMIT);
 			txfFone.setBounds(450, 180, 155, 28);
 			txfFone.setToolTipText("Digite o telefone");
-			txfFone.setEnabled(false);
+			txfFone.setEditable(false);
 			getContentPane().add(txfFone);
 
 			labes = new JLabel("*");
@@ -141,7 +137,7 @@ public class InformacoesAlunosWindow extends AbstractWindowFrame{
 			txfCel = new JFormattedTextField(alunoSelecionado.getCelular());
 			txfCel.setFocusLostBehavior(JFormattedTextField.COMMIT);
 			txfCel.setBounds(640, 180, 190, 28);
-			txfCel.setEnabled(false);
+			txfCel.setEditable(false);
 			getContentPane().add(txfCel);
 					
 			// Cidade
@@ -157,7 +153,7 @@ public class InformacoesAlunosWindow extends AbstractWindowFrame{
 			cbxCidade.addItem(alunoSelecionado.getCidade());
 			cbxCidade.setEnabled(false);
 			cbxCidade.setBounds(450, 280, 170, 28);
-			cbxCidade.setEnabled(false);
+			cbxCidade.setEditable(false);
 			getContentPane().add(cbxCidade);
 			
 			labes = new JLabel("Número:");
@@ -166,7 +162,7 @@ public class InformacoesAlunosWindow extends AbstractWindowFrame{
 
 			txfNum = new JFormattedTextField(alunoSelecionado.getNumero());
 			txfNum.setBounds(755, 330, 75, 28);
-			txfNum.setEnabled(false);
+			txfNum.setEditable(false);
 			getContentPane().add(txfNum);
 
 
@@ -180,7 +176,7 @@ public class InformacoesAlunosWindow extends AbstractWindowFrame{
 
 		txfEmail = new JTextField(alunoSelecionado.getEmail());
 		txfEmail.setBounds(450, 230, 380, 28);
-		txfEmail.setEnabled(false);
+		txfEmail.setEditable(false);
 		getContentPane().add(txfEmail);
 		
 		// coluna da direita, cmpos e escrita
@@ -195,7 +191,7 @@ public class InformacoesAlunosWindow extends AbstractWindowFrame{
 
 		txfEnder = new JTextField(alunoSelecionado.getEndereco());
 		txfEnder.setBounds(450, 330, 280, 28);
-		txfEnder.setEnabled(false);
+		txfEnder.setEditable(false);
 		getContentPane().add(txfEnder);
 
 		labes = new JLabel("Complemento:");
@@ -204,7 +200,7 @@ public class InformacoesAlunosWindow extends AbstractWindowFrame{
 
 		txfComplemen = new JTextField(alunoSelecionado.getComplemento());
 		txfComplemen.setBounds(450, 380, 380, 28);
-		txfComplemen.setEnabled(false);
+		txfComplemen.setEditable(false);
 		getContentPane().add(txfComplemen);
 		
 		labes = new JLabel("*");
@@ -217,7 +213,7 @@ public class InformacoesAlunosWindow extends AbstractWindowFrame{
 
 		txfBairro = new JTextField(alunoSelecionado.getBairro());
 		txfBairro.setBounds(650, 280, 180, 28);
-		txfBairro.setEnabled(false);
+		txfBairro.setEditable(false);
 		getContentPane().add(txfBairro);
 		
 		labes = new JLabel("Observação:");
@@ -226,7 +222,7 @@ public class InformacoesAlunosWindow extends AbstractWindowFrame{
 
 		txfObs = new JTextField(alunoSelecionado.getObservacao());
 		txfObs.setBounds(450, 430, 380, 28);
-		txfObs.setEnabled(false);
+		txfObs.setEditable(false);
 		getContentPane().add(txfObs);
 	}
 }

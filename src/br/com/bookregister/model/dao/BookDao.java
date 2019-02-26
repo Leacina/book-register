@@ -26,8 +26,8 @@ public class BookDao {
 
 	public void registerBook(Book b) {
 		try {
-			stmt = con.prepareStatement("insert into livro (codigo,nome,proprietario,status,autor,ano)"
-					+ "values (?,?,?,?,?,?)");
+			stmt = con.prepareStatement("insert into livro (codigo,nome,proprietario,status,autor,ano,imagem)"
+					+ "values (?,?,?,?,?,?,?)");
 
 			stmt.setString(1, b.getCodigo());
 			stmt.setString(2, b.getNome());
@@ -35,7 +35,8 @@ public class BookDao {
 			stmt.setString(4, b.getStatus());
 			stmt.setString(5, b.getAutor());
 			stmt.setString(6, b.getAno());
-
+			stmt.setBytes(7, b.getImagem());
+			
 			stmt.executeUpdate();
 
 			JOptionPane.showMessageDialog(null, "Livro cadastrado com sucesso!");
@@ -93,6 +94,7 @@ public class BookDao {
 				book.setStatus(rS.getString("status"));
 				book.setAutor(rS.getString("autor"));
 				book.setAno(rS.getString("ano"));
+				book.setEmprestimo(rS.getInt("emprestimo_aluno"));
 				
 				listaLivros.add(book);
 			}
@@ -151,6 +153,7 @@ public class BookDao {
 				book.setAutor(rS.getString("autor"));
 				book.setAno(rS.getString("ano"));
 				book.setEmprestimo(rS.getInt("emprestimo_aluno"));
+				book.setImagem(rS.getBytes("imagem"));
 				
 				listaLivros.add(book);
 			}
@@ -240,5 +243,32 @@ public class BookDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public Book getLivroPorCodigo(String codigo) {
+		try {
+			stmt = con.prepareStatement("select * from livro where codigo = ?");
+			
+			stmt.setString(1, codigo);
+			rS = stmt.executeQuery();
+			
+			if(rS.next()) {
+				Book book = new Book();
+				book.setId(Integer.parseInt(rS.getString("id")));
+				book.setCodigo(rS.getString("codigo"));
+				book.setNome(rS.getString("nome"));
+				book.setProprietario(rS.getString("proprietario"));
+				book.setStatus(rS.getString("status"));
+				book.setAutor(rS.getString("autor"));
+				book.setAno(rS.getString("ano"));
+				book.setEmprestimo(rS.getInt("emprestimo_aluno"));
+				book.setImagem(rS.getBytes("imagem"));
+				
+				return book;
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 }

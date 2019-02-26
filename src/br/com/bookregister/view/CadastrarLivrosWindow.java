@@ -1,21 +1,31 @@
 package br.com.bookregister.view;
 
+import java.awt.AlphaComposite;
 import java.awt.Color;
+import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 import java.text.ParseException;
 
+import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.text.MaskFormatter;
 
 import br.com.bookregister.model.bean.Aluno;
@@ -36,8 +46,10 @@ public class CadastrarLivrosWindow extends AbstractWindowFrame{
 	};
 		
 	private JTextField txfNome, txfCod, txfProprietario,txfAutor,txfAno;
-	private JButton btnSalvar, btnLimpar;
-	private JLabel labes;
+	private JButton btnSalvar, btnLimpar,btnAbrirImagem;
+	private JPanel panel;
+	private JLabel labes,image;
+	private File imagem;
 	
 	public CadastrarLivrosWindow() {
 		super("Cadastrar Livro");
@@ -140,10 +152,16 @@ public class CadastrarLivrosWindow extends AbstractWindowFrame{
 		getContentPane().add(txfAno);
 		txfAno.addKeyListener((KeyListener) acao);
 		
+		image = new JLabel("");
+		panel = new JPanel();
+		panel.setBounds(450,360,140,120);
+		panel.setBackground(Color.white);
+		panel.add(image);
+		getContentPane().add(panel);
 		
 		
 		btnLimpar = new JButton("Limpar");
-		btnLimpar.setBounds(450, 360, 95, 28);
+		btnLimpar.setBounds(450, 500, 95, 28);
 		btnLimpar.setToolTipText("Clique aqui para limpar os campos");
 		getContentPane().add(btnLimpar);
 		btnLimpar.addActionListener(new ActionListener() {
@@ -155,7 +173,7 @@ public class CadastrarLivrosWindow extends AbstractWindowFrame{
 		});
 
 		btnSalvar = new JButton("Salvar");
-		btnSalvar.setBounds(555, 360, 95, 28);
+		btnSalvar.setBounds(555, 500, 95, 28);
 		getContentPane().add(btnSalvar);
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -164,6 +182,18 @@ public class CadastrarLivrosWindow extends AbstractWindowFrame{
 		});
 		
 		btnSalvar.addKeyListener((KeyListener) acao);
+		
+		btnAbrirImagem = new JButton("Abrir");
+		btnAbrirImagem.setBounds(605, 453, 45, 28);
+		getContentPane().add(btnAbrirImagem);
+		btnAbrirImagem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				imagem = selecionarImagem();
+				abrirImagem(imagem);
+			}
+		});
+		
+		btnAbrirImagem.addKeyListener((KeyListener) acao);
 	}
 	
 	public void cadastraAluno() {
@@ -180,7 +210,9 @@ public class CadastrarLivrosWindow extends AbstractWindowFrame{
 			b.setAutor(txfAutor.getText());
 			b.setAno("2018");
 			b.setStatus("Disponivel");
+			b.setImagem(getImagem());
 			
+			System.out.println(getImagem().toString());
 			bD.registerBook(b);
 		}
 	}
@@ -204,6 +236,67 @@ public class CadastrarLivrosWindow extends AbstractWindowFrame{
 		txfCod.setText("");
 		txfProprietario.setText("");
 	
+	}
+	
+	public File selecionarImagem(){
+		JFileChooser fileChooser = new JFileChooser();
+		FileNameExtensionFilter filtro = new FileNameExtensionFilter("Imagens em JPEG e PNG", "jpg","png");
+		fileChooser.addChoosableFileFilter(filtro);
+		fileChooser.setAcceptAllFileFilterUsed(false);
+		fileChooser.setDialogType(JFileChooser.OPEN_DIALOG);
+		fileChooser.setCurrentDirectory(new File("/"));
+		fileChooser.showOpenDialog(this);
+		
+		return fileChooser.getSelectedFile();
+	}
+	
+	private byte[] getImagem(){
+		boolean isPng = false;
+		
+		if(imagem != null){
+			isPng = imagem.getName().endsWith("png");
+			
+			try {
+				
+				BufferedImage image = ImageIO.read(imagem);
+				ByteArrayOutputStream out = new ByteArrayOutputStream();
+				int type = BufferedImage.TYPE_INT_RGB;
+				
+				if(isPng){
+					type = BufferedImage.BITMASK;
+				}
+				
+				BufferedImage novaImagem = new BufferedImage(panel.getWidth() - 5, panel.getHeight() - 10, type);
+				Graphics2D g = novaImagem.createGraphics();
+				g.setComposite(AlphaComposite.Src);
+				g.drawImage(image, 0,0, panel.getWidth() -5, panel.getHeight() -10, null);
+				
+				if(isPng){
+					ImageIO.write(novaImagem, "png", out);
+				}else{
+					ImageIO.write(novaImagem, "jpg", out);
+				}
+				
+				out.flush();
+				byte[] byteArray = out.toByteArray();
+				out.close();
+				
+				return byteArray;
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return null;
+	}
+	
+	private void abrirImagem(Object source){
+		if(source instanceof File){
+			ImageIcon icon = new ImageIcon(imagem.getAbsolutePath());
+			icon.setImage(icon.getImage().getScaledInstance(panel.getWidth()-5, panel.getHeight() -10, 100));
+			image.setIcon(icon);
+		}
 	}
 	
 }

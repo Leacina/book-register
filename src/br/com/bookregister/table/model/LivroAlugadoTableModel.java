@@ -11,7 +11,7 @@ public class LivroAlugadoTableModel extends AbstractTableModel{
 	private static final long serialVersionUID = -3586211638575736174L;
 
 	private List<Book> livros;
-	private String[] colunas = new String[] { "Código", "Proprietario", "Nome","Autor","Ano"  };
+	private String[] colunas = new String[] { "Código", "Proprietario", "Nome","Autor","Ano"};
 
 	public LivroAlugadoTableModel(List<Book> book) {
 		this.livros = book;
@@ -51,7 +51,6 @@ public class LivroAlugadoTableModel extends AbstractTableModel{
 		fireTableCellUpdated(rowIndex, 2);
 		fireTableCellUpdated(rowIndex, 3);
 		fireTableCellUpdated(rowIndex, 4);
-
 	}
 
 	@Override
@@ -69,7 +68,7 @@ public class LivroAlugadoTableModel extends AbstractTableModel{
 			book.setAutor(aValue.toString());
 		case 4:
 			book.setAno(aValue.toString());
-
+			
 		default:
 			System.err.println("Índice da coluna inválido");
 		}
